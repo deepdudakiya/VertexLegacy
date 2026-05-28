@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Vertex Legacy Consulting — Your Growth, Our Expertise</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --navy:#132250;
+  --navy2:#0d1a3d;
+  --navy3:#1a2d5a;
+  --gold:#b8973a;
+  --gold2:#d4af55;
+  --white:#ffffff;
+  --off:#f5f4f0;
+  --light:#fafaf8;
+  --text:#1c1c1c;
+  --muted:#6b7280;
+  --border:#e2ddd6;
+}
+html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',sans-serif;color:var(--text);overflow-x:hidden;}
+a{text-decoration:none;color:inherit;}
+img{display:block;}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar{width:4px;}
+::-webkit-scrollbar-track{background:var(--navy2);}
+::-webkit-scrollbar-thumb{background:var(--gold);}
+
+/* ══════════════ NAV ══════════════ */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:300;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 4%;height:72px;
+  background:#fff;
+  border-bottom:1px solid #e8e8e8;
+  box-shadow:0 2px 12px rgba(0,0,0,0.06);
+}
+nav.scrolled{background:#fff;box-shadow:0 2px 16px rgba(0,0,0,0.1);}
+.nav-left{display:flex;align-items:center;}
+.logo-circle{display:none;}
+.logo-text{display:none;}
+.logo-circle{
+  width:52px;height:52px;border-radius:50%;
+  background:#000;border:1.5px solid var(--gold);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;overflow:hidden;
+}
+.logo-circle svg{width:40px;height:40px;}
+.logo-text{line-height:1.2;}
+.logo-text .top{font-family:'Playfair Display',serif;font-size:14px;color:var(--navy);letter-spacing:0.5px;}
+.logo-text .bot{font-size:9px;color:var(--muted);letter-spacing:3px;font-weight:300;}
+.nav-links{display:flex;gap:36px;list-style:none;}
+.nav-links a{font-size:12.5px;color:var(--navy);letter-spacing:0.5px;font-weight:500;transition:color 0.2s;position:relative;}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;right:0;height:1.5px;background:var(--navy);transform:scaleX(0);transform-origin:left;transition:transform 0.25s;}
+.nav-links a:hover{color:var(--navy2);}
+.nav-links a:hover::after{transform:scaleX(1);}
+.nav-btn{
+  background:var(--navy);border:1px solid var(--navy);
+  color:#fff;padding:9px 22px;font-size:12px;font-weight:500;
+  letter-spacing:1px;cursor:pointer;transition:all 0.25s;
+  font-family:'DM Sans',sans-serif;
+}
+.nav-btn:hover{background:var(--navy2);color:#fff;}
+.ham{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;}
+.ham span{width:22px;height:2px;background:var(--navy);transition:all 0.3s;}
+.mob-nav{display:none;position:fixed;top:72px;left:0;right:0;background:#fff;z-index:299;border-top:1px solid #e8e8e8;padding:24px 5%;box-shadow:0 8px 24px rgba(0,0,0,0.1);}
+.mob-nav.open{display:block;}
+.mob-nav a{display:block;color:var(--navy);font-size:15px;padding:13px 0;border-bottom:1px solid #f0f0f0;letter-spacing:0.3px;font-weight:500;}
+.mob-nav .mob-cta{margin-top:18px;display:block;text-align:center;background:var(--navy);color:#fff;padding:13px;font-weight:600;font-size:14px;letter-spacing:0.5px;}
+
+/* ══════════════ HERO ══════════════ */
+.hero{
+  position:relative;min-height:100vh;
+  display:flex;flex-direction:column;justify-content:center;
+  padding:72px 0 0;overflow:hidden;
+}
+.hero-bg{
+  position:absolute;inset:0;
+  background:linear-gradient(135deg,#0a1428 0%,#132250 40%,#1a3060 70%,#0d1a3d 100%);
+}
+/* animated subtle grid */
+.hero-grid{
+  position:absolute;inset:0;
+  background-image:linear-gradient(rgba(184,151,58,0.05) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(184,151,58,0.05) 1px,transparent 1px);
+  background-size:60px 60px;
+  animation:gridShift 20s linear infinite;
+}
+@keyframes gridShift{0%{background-position:0 0;}100%{background-position:60px 60px;}}
+.hero-glow{position:absolute;top:20%;right:10%;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(184,151,58,0.08) 0%,transparent 70%);pointer-events:none;}
+.hero-glow2{position:absolute;bottom:10%;left:5%;width:350px;height:350px;border-radius:50%;background:radial-gradient(circle,rgba(26,48,96,0.6) 0%,transparent 70%);pointer-events:none;}
+
+.hero-inner{position:relative;z-index:2;padding:80px 5% 48px;flex:1;display:flex;flex-direction:column;justify-content:flex-end;padding-bottom:60px;}
+.hero-eyebrow{display:none;}
+.hero-line{display:none;}
+.hero h1{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(36px,6vw,76px);
+  font-weight:700;color:#fff;
+  line-height:1.08;
+  margin-bottom:16px;
+  font-style:italic;
+}
+.hero h1 .accent{color:var(--gold2);font-style:italic;}
+.hero h1 .normal{font-style:normal;}
+.hero-sub{
+  font-size:clamp(15px,2vw,19px);
+  color:rgba(255,255,255,0.75);
+  letter-spacing:0;
+  margin-bottom:36px;
+  font-weight:400;
+  font-style:normal;
+  font-family:'DM Sans',sans-serif;
+}
+.hero-desc{
+  max-width:520px;
+  font-size:15px;color:rgba(255,255,255,0.6);
+  line-height:1.85;margin-bottom:44px;font-weight:300;
+}
+.hero-actions{display:flex;align-items:center;gap:24px;flex-wrap:wrap;}
+.btn-primary{
+  background:#fff;color:var(--navy);
+  padding:14px 36px;font-size:14px;font-weight:600;
+  letter-spacing:0.3px;cursor:pointer;border:none;
+  transition:all 0.25s;font-family:'DM Sans',sans-serif;
+  display:inline-flex;align-items:center;gap:8px;
+}
+.btn-primary:hover{background:#f0f0f0;}
+.btn-ghost{
+  background:transparent;color:rgba(255,255,255,0.85);
+  padding:4px 0;font-size:14px;font-weight:400;
+  letter-spacing:0;cursor:pointer;
+  border:none;border-bottom:1px solid rgba(255,255,255,0.4);
+  transition:all 0.25s;font-family:'DM Sans',sans-serif;
+}
+.btn-ghost:hover{color:#fff;border-color:#fff;}
+
+/* hero bottom bar */
+.hero-bar{
+  position:relative;z-index:2;
+  background:var(--navy2);
+  display:grid;grid-template-columns:1fr 1fr;
+  border-top:2px solid rgba(184,151,58,0.3);
+}
+.hero-stat{padding:28px 5%;border-right:1px solid rgba(255,255,255,0.08);border-bottom:1px solid rgba(255,255,255,0.08);}
+.hero-stat:nth-child(2){border-right:none;}
+.hero-stat:nth-child(3){border-bottom:none;}
+.hero-stat:nth-child(4){border-right:none;border-bottom:none;}
+.hero-stat .num{font-family:'Playfair Display',serif;font-size:38px;font-weight:700;color:#fff;line-height:1;}
+.hero-stat .lbl{font-size:12px;color:rgba(255,255,255,0.5);letter-spacing:0;margin-top:6px;font-weight:300;}
+
+/* scroll indicator */
+.scroll-hint{
+  position:absolute;bottom:28px;right:5%;z-index:2;
+  display:flex;align-items:center;gap:10px;
+  font-size:10px;color:rgba(255,255,255,0.3);letter-spacing:2px;
+}
+.scroll-line{width:30px;height:1px;background:rgba(255,255,255,0.2);}
+
+/* ══════════════ TICKER ══════════════ */
+.ticker{background:var(--gold);padding:12px 0;overflow:hidden;white-space:nowrap;}
+.ticker-inner{display:inline-flex;gap:0;animation:tick 20s linear infinite;}
+.ticker-item{font-size:11px;font-weight:600;color:var(--navy2);letter-spacing:2px;padding:0 32px;}
+.ticker-dot{color:rgba(13,26,61,0.4);}
+@keyframes tick{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+
+/* ══════════════ SECTION BASE ══════════════ */
+.section-wrap{padding:96px 5%;}
+.section-tag{font-size:10px;color:var(--gold);letter-spacing:4px;font-weight:600;margin-bottom:14px;display:flex;align-items:center;gap:12px;}
+.section-tag::before{content:'';width:28px;height:1px;background:var(--gold);}
+.section-h{font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,46px);font-weight:400;color:var(--navy);line-height:1.15;margin-bottom:16px;}
+.section-p{font-size:15px;color:var(--muted);line-height:1.9;font-weight:300;}
+.center{text-align:center;}
+.center .section-tag{justify-content:center;}
+
+/* ══════════════ ABOUT ══════════════ */
+.about{background:var(--white);}
+.about-grid{display:grid;grid-template-columns:1fr;gap:40px;max-width:720px;}
+.about-left .section-p{margin-bottom:24px;}
+.about-pillars{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);margin-top:40px;}
+.pillar{background:var(--white);padding:24px 20px;}
+.pillar-num{font-family:'Playfair Display',serif;font-size:28px;color:var(--gold);font-weight:400;line-height:1;margin-bottom:8px;}
+.pillar h4{font-size:13px;font-weight:600;color:var(--navy);margin-bottom:4px;letter-spacing:0.3px;}
+.pillar p{font-size:12px;color:var(--muted);line-height:1.6;}
+.about-visual{position:relative;}
+.about-card-big{
+  background:var(--navy);padding:48px 40px;
+  position:relative;overflow:hidden;
+}
+
+.about-card-big .big-num{font-family:'Playfair Display',serif;font-size:80px;font-weight:400;color:rgba(184,151,58,0.15);line-height:1;margin-bottom:16px;}
+.about-card-big h3{font-family:'Playfair Display',serif;font-size:22px;color:#fff;font-weight:400;margin-bottom:14px;}
+.about-card-big p{font-size:14px;color:rgba(255,255,255,0.55);line-height:1.8;font-weight:300;}
+.about-tag-row{display:flex;gap:12px;margin-top:24px;flex-wrap:wrap;}
+.about-tag{font-size:10px;color:var(--gold);border:1px solid rgba(184,151,58,0.3);padding:5px 12px;letter-spacing:1.5px;}
+.about-accent{
+  position:absolute;bottom:20px;right:20px;
+  width:80px;height:80px;border:2px solid var(--gold);opacity:0.25;
+  pointer-events:none;
+}
+
+/* ══════════════ SERVICES ══════════════ */
+.services{background:var(--off);}
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);margin-top:56px;}
+.svc{
+  background:var(--white);padding:40px 32px;
+  transition:all 0.3s;position:relative;overflow:hidden;
+}
+.svc::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:2px;
+  background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform 0.35s;
+}
+.svc:hover{background:var(--navy);}
+.svc:hover .svc-num,.svc:hover h3,.svc:hover p,.svc:hover .svc-arrow{color:#fff !important;}
+.svc:hover .svc-line{background:#fff;}
+.svc:hover::after{transform:scaleX(1);}
+.svc-num{font-family:'Playfair Display',serif;font-size:13px;color:var(--gold);font-weight:400;letter-spacing:2px;margin-bottom:28px;display:block;}
+.svc-icon-wrap{margin-bottom:20px;}
+.svc-icon-wrap svg{width:32px;height:32px;stroke:var(--gold);fill:none;stroke-width:1.2;}
+.svc h3{font-family:'Playfair Display',serif;font-size:20px;font-weight:400;color:var(--navy);margin-bottom:12px;line-height:1.2;}
+.svc-line{width:24px;height:1px;background:var(--border);margin-bottom:16px;transition:background 0.3s;}
+.svc p{font-size:13px;color:var(--muted);line-height:1.8;font-weight:300;transition:color 0.3s;}
+.svc-arrow{font-size:18px;color:var(--gold);margin-top:24px;display:block;transition:color 0.3s;}
+.svc-loan{
+  grid-column:1/-1;
+  background:var(--navy);padding:36px 40px;
+  display:flex;align-items:center;justify-content:space-between;
+  gap:24px;flex-wrap:wrap;
+  border-top:2px solid var(--gold);
+}
+.svc-loan h3{font-family:'Playfair Display',serif;font-size:22px;color:#fff;font-weight:400;}
+.svc-loan p{font-size:14px;color:rgba(255,255,255,0.5);margin-top:4px;font-weight:300;}
+.svc-loan-btn{
+  background:transparent;border:1px solid var(--gold);
+  color:var(--gold);padding:12px 28px;font-size:12px;
+  letter-spacing:1.5px;cursor:pointer;white-space:nowrap;
+  transition:all 0.25s;font-family:'DM Sans',sans-serif;
+}
+.svc-loan-btn:hover{background:var(--gold);color:var(--navy2);}
+
+/* ══════════════ WHY US ══════════════ */
+.whyus{background:var(--navy);position:relative;overflow:hidden;}
+.whyus-bg{position:absolute;inset:0;background-image:linear-gradient(rgba(184,151,58,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(184,151,58,0.04) 1px,transparent 1px);background-size:50px 50px;}
+.whyus .section-h{color:#fff;}
+.whyus-inner{position:relative;z-index:2;}
+.whyus-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:0;border:1px solid rgba(255,255,255,0.08);margin-top:56px;}
+.why{
+  padding:36px 24px;border-right:1px solid rgba(255,255,255,0.08);
+  transition:background 0.3s;text-align:center;
+}
+.why:last-child{border-right:none;}
+.why:hover{background:rgba(184,151,58,0.06);}
+.why-icon{font-size:28px;margin-bottom:16px;}
+.why h4{font-size:13px;font-weight:600;color:#fff;margin-bottom:8px;letter-spacing:0.3px;}
+.why p{font-size:12px;color:rgba(255,255,255,0.4);line-height:1.7;font-weight:300;}
+.why-divider{grid-column:1/-1;height:1px;background:rgba(255,255,255,0.08);}
+
+/* ══════════════ GST ══════════════ */
+.gst{background:var(--light);}
+.gst-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-top:56px;}
+.gst-card{background:var(--white);border:1px solid var(--border);padding:32px;}
+.gst-card-head{display:flex;align-items:center;gap:12px;margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid var(--border);}
+.gst-card-head .icon{width:36px;height:36px;background:var(--navy);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;}
+.gst-card h4{font-family:'Playfair Display',serif;font-size:16px;font-weight:400;color:var(--navy);}
+.gst-card ul{list-style:none;}
+.gst-card ul li{font-size:13px;color:var(--muted);padding:6px 0;display:flex;gap:10px;border-bottom:1px solid rgba(0,0,0,0.04);line-height:1.5;font-weight:300;}
+.gst-card ul li:last-child{border:none;}
+.gst-card ul li::before{content:'—';color:var(--gold);font-size:11px;flex-shrink:0;margin-top:2px;}
+.gst-cta{
+  margin-top:40px;background:var(--navy);padding:40px;
+  display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;
+}
+.gst-cta p{font-size:15px;color:rgba(255,255,255,0.65);font-weight:300;max-width:500px;line-height:1.7;}
+.gst-cta-btn{
+  background:var(--gold);color:var(--navy2);
+  padding:13px 32px;font-size:12px;font-weight:600;
+  letter-spacing:1px;cursor:pointer;border:none;white-space:nowrap;
+  font-family:'DM Sans',sans-serif;transition:background 0.2s;
+}
+.gst-cta-btn:hover{background:var(--gold2);}
+
+/* ══════════════ CONTACT ══════════════ */
+.contact{background:var(--off);}
+.contact-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:72px;}
+.contact-info .section-p{margin-bottom:36px;}
+.c-item{display:flex;gap:16px;margin-bottom:24px;align-items:flex-start;}
+.c-icon{width:40px;height:40px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.c-icon svg{width:18px;height:18px;stroke:var(--navy);fill:none;stroke-width:1.5;}
+.c-label{font-size:11px;color:var(--muted);letter-spacing:1.5px;margin-bottom:3px;font-weight:300;}
+.c-val{font-size:14px;color:var(--navy);font-weight:500;}
+.wa-link{
+  display:inline-flex;align-items:center;gap:10px;
+  background:#25D366;color:#fff;
+  padding:12px 24px;font-size:13px;font-weight:500;
+  margin-top:8px;transition:background 0.2s;
+}
+.wa-link:hover{background:#1ebe5c;}
+.contact-form{background:var(--white);padding:40px;border:1px solid var(--border);}
+.contact-form h3{font-family:'Playfair Display',serif;font-size:22px;font-weight:400;color:var(--navy);margin-bottom:28px;padding-bottom:20px;border-bottom:1px solid var(--border);}
+.f-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.fg{margin-bottom:16px;}
+.fg label{display:block;font-size:10px;color:var(--muted);letter-spacing:2px;margin-bottom:7px;font-weight:500;}
+.fg input,.fg select,.fg textarea{
+  width:100%;padding:11px 14px;
+  border:1px solid var(--border);background:var(--off);
+  font-family:'DM Sans',sans-serif;font-size:14px;color:var(--text);
+  outline:none;transition:border 0.2s;font-weight:300;
+  -webkit-appearance:none;
+}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--gold);background:#fff;}
+.fg textarea{height:88px;resize:vertical;}
+.f-submit{
+  width:100%;background:var(--navy);color:#fff;
+  padding:14px;font-size:13px;font-weight:500;
+  letter-spacing:1px;cursor:pointer;border:none;
+  font-family:'DM Sans',sans-serif;transition:all 0.25s;margin-top:4px;
+}
+.f-submit:hover{background:var(--gold);color:var(--navy2);}
+.f-success{display:none;margin-top:14px;padding:14px;background:#f0fdf4;border-left:3px solid #22c55e;font-size:13px;color:#166534;}
+
+/* ══════════════ FOOTER ══════════════ */
+footer{background:var(--navy2);border-top:1px solid rgba(184,151,58,0.2);}
+.footer-top{
+  padding:60px 5% 40px;
+  display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;
+  border-bottom:1px solid rgba(255,255,255,0.06);
+}
+.f-brand .logo-row{display:flex;align-items:center;gap:12px;margin-bottom:16px;}
+.f-brand .logo-row .vl{width:46px;height:46px;border-radius:50%;border:1px solid var(--gold);background:#000;display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden;}
+.f-brand .logo-row .nm{font-family:'Playfair Display',serif;font-size:16px;color:#fff;line-height:1.2;}
+.f-brand .logo-row .nm small{display:block;font-size:9px;color:rgba(255,255,255,0.35);letter-spacing:3px;font-family:'DM Sans',sans-serif;font-weight:300;}
+.f-brand p{font-size:13px;color:rgba(255,255,255,0.38);line-height:1.9;font-weight:300;margin-bottom:20px;}
+.f-social{display:flex;gap:12px;margin-bottom:18px;}
+.f-social a{
+  width:34px;height:34px;border:1px solid rgba(255,255,255,0.12);
+  display:flex;align-items:center;justify-content:center;
+  color:rgba(255,255,255,0.45);transition:all 0.2s;
+}
+.f-social a:hover{border-color:var(--gold);color:var(--gold);}
+.f-social a svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.5;}
+.f-social a[aria-label="WhatsApp"] svg{fill:currentColor;stroke:none;}
+.f-tagline{font-size:10px;color:rgba(255,255,255,0.25);letter-spacing:1.5px;}
+.f-col h5{font-size:10px;color:var(--gold);letter-spacing:3px;font-weight:600;margin-bottom:18px;}
+.f-col ul{list-style:none;}
+.f-col ul li{font-size:13px;color:rgba(255,255,255,0.42);margin-bottom:10px;font-weight:300;}
+.f-col ul li a{color:rgba(255,255,255,0.42);transition:color 0.2s;}
+.f-col ul li a:hover{color:var(--gold);}
+.footer-presence{
+  padding:14px 5%;
+  display:flex;align-items:center;gap:16px;
+  border-bottom:1px solid rgba(255,255,255,0.06);
+  flex-wrap:wrap;
+}
+.footer-presence .label{font-size:9px;color:var(--gold);letter-spacing:3px;font-weight:600;}
+.footer-presence .cities{font-size:12px;color:rgba(255,255,255,0.3);font-weight:300;letter-spacing:0.3px;}
+.footer-bot{
+  padding:18px 5%;
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;
+}
+.footer-bot p{font-size:12px;color:rgba(255,255,255,0.25);}
+.footer-bot a{font-size:12px;color:var(--gold);}
+
+/* ══════════════ WA FLOAT ══════════════ */
+.wa-float{
+  position:fixed;bottom:26px;right:26px;z-index:999;
+  width:52px;height:52px;border-radius:50%;
+  background:#25D366;display:flex;align-items:center;justify-content:center;
+  box-shadow:0 4px 20px rgba(37,211,102,0.45);
+  transition:transform 0.2s;
+}
+.wa-float:hover{transform:scale(1.1);}
+.wa-float svg{width:26px;height:26px;fill:#fff;}
+
+/* ══════════════ REVEAL ══════════════ */
+.r{opacity:0;transform:translateY(28px);transition:opacity 0.7s ease,transform 0.7s ease;}
+.r.in{opacity:1;transform:none;}
+.r2{opacity:0;transform:translateY(28px);transition:opacity 0.7s 0.15s ease,transform 0.7s 0.15s ease;}
+.r2.in{opacity:1;transform:none;}
+.r3{opacity:0;transform:translateY(28px);transition:opacity 0.7s 0.3s ease,transform 0.7s 0.3s ease;}
+.r3.in{opacity:1;transform:none;}
+
+/* ══════════════ MOBILE ══════════════ */
+@media(max-width:900px){
+  .nav-links,.nav-btn{display:none;}
+  .ham{display:flex;}
+  nav svg[viewBox="0 0 320 70"]{height:32px;}
+  .hero{padding:72px 0 0;}
+  .hero-inner{padding:28px 5% 24px;}
+  .hero-eyebrow{display:none;}
+  .hero-bar{grid-template-columns:1fr 1fr 1fr;}
+  .hero-stat .num{font-size:30px;}
+  .hero-stat .lbl{font-size:9px;}
+  .about-grid{grid-template-columns:1fr;gap:40px;}
+  .services-grid{grid-template-columns:1fr 1fr;}
+  .whyus-grid{grid-template-columns:1fr 1fr;}
+  .why:nth-child(2){border-right:none;}
+  .why-divider{display:none;}
+  .gst-grid{grid-template-columns:1fr;}
+  .contact-grid{grid-template-columns:1fr;gap:40px;}
+  .footer-top{grid-template-columns:1fr 1fr;gap:32px;}
+  .f-brand{grid-column:1/-1;}
+  .footer-bot{flex-direction:column;text-align:center;}
+  .footer-presence{justify-content:center;text-align:center;}
+  .section-wrap{padding:64px 5%;}
+  .gst-cta{flex-direction:column;text-align:center;}
+  .svc-loan{flex-direction:column;text-align:center;}
+  .f-row{grid-template-columns:1fr;}
+}
+@media(max-width:560px){
+  .hero{padding:72px 0 0;}
+  .hero-inner{padding:28px 5% 24px;}
+  .services-grid{grid-template-columns:1fr;}
+  .hero-actions{flex-direction:column;align-items:stretch;}
+  .hero-actions .btn-primary,.hero-actions .btn-ghost{width:100%;text-align:center;padding:14px;}
+  .hero-bar{grid-template-columns:1fr;}
+  .hero-stat{border-right:none;border-bottom:1px solid rgba(255,255,255,0.08);padding:18px 5%;}
+  .about-pillars{grid-template-columns:1fr;}
+  .whyus-grid{grid-template-columns:1fr;}
+  .why{border-right:none;border-bottom:1px solid rgba(255,255,255,0.08);}
+  .contact-form{padding:24px;}
+  .scroll-hint{display:none;}
+  .footer-top{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<!-- WA FLOAT -->
+<a class="wa-float" href="https://wa.me/919601172397?text=Hello%20Vertex%20Legacy%20Consulting%2C%20I%20need%20your%20services." target="_blank" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-left">
+    <a href="#home" style="display:flex;align-items:center;">
+      <svg viewBox="0 0 320 70" xmlns="http://www.w3.org/2000/svg" height="42" style="display:block;">
+        <defs>
+          <linearGradient id="cgrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" style="stop-color:#1a3a8c;stop-opacity:1"/>
+            <stop offset="100%" style="stop-color:#6b9bd2;stop-opacity:1"/>
+          </linearGradient>
+        </defs>
+        <!-- v -->
+        <text x="0" y="56" font-family="'DM Sans',Arial,sans-serif" font-size="58" font-weight="700" fill="#1a3a8c">v</text>
+        <!-- l (dark vertical bar feel) -->
+        <text x="44" y="56" font-family="'DM Sans',Arial,sans-serif" font-size="58" font-weight="700" fill="#132250">l</text>
+        <!-- c in gradient -->
+        <text x="62" y="56" font-family="'DM Sans',Arial,sans-serif" font-size="58" font-weight="700" fill="url(#cgrad)">c</text>
+        <!-- vertical divider -->
+        <rect x="115" y="8" width="2.5" height="54" fill="#132250" opacity="0.4"/>
+        <!-- VERTEX LEGACY -->
+        <text x="128" y="32" font-family="'DM Sans',Arial,sans-serif" font-size="17" font-weight="700" fill="#132250" letter-spacing="0.5">VERTEX LEGACY</text>
+        <!-- CONSULTING -->
+        <text x="128" y="54" font-family="'DM Sans',Arial,sans-serif" font-size="17" font-weight="700" fill="#132250" letter-spacing="0.5">CONSULTING</text>
+      </svg>
+    </a>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#why">Why Us</a></li>
+    <li><a href="#gst">GST Guide</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="nav-btn" onclick="go('contact')">Get Consultation</button>
+  <div class="ham" id="ham" onclick="toggleMob()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#why">Why Us</a></li>
+    <li><a href="#gst">GST Guide</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="nav-btn" onclick="go('contact')">Get Consultation</button>
+  <div class="ham" id="ham" onclick="toggleMob()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+<div class="mob-nav" id="mobnav">
+  <a href="#about" onclick="closeMob()">About Us</a>
+  <a href="#services" onclick="closeMob()">Services</a>
+  <a href="#why" onclick="closeMob()">Why Choose Us</a>
+  <a href="#gst" onclick="closeMob()">GST Guide</a>
+  <a href="#contact" onclick="closeMob()">Contact</a>
+  <a class="mob-cta" href="#contact" onclick="closeMob()">Get Free Consultation &rarr;</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+  <div class="hero-inner">
+    <div class="hero-eyebrow">
+      <div class="hero-line"></div>
+      <span>YOUR GROWTH. OUR EXPERTISE.</span>
+    </div>
+    <h1>One Stop <span class="accent">Solution</span><br/>For Your Business</h1>
+    <p class="hero-sub">Tax &bull; Compliance &bull; Growth</p>
+    <p class="hero-desc">Expert guidance and trusted solutions for businesses across India. From income tax filing to company registration — we handle complexity so you can focus on growing.</p>
+    <div class="hero-actions">
+      <button class="btn-primary" onclick="go('contact')">FREE CONSULTATION &rarr;</button>
+      <button class="btn-ghost" onclick="go('services')">VIEW SERVICES</button>
+    </div>
+  </div>
+  <div class="hero-bar">
+    <div class="hero-stat"><div class="num">150+</div><div class="lbl">CLIENTS NATIONWIDE</div></div>
+    <div class="hero-stat"><div class="num">6+</div><div class="lbl">CORE SERVICES</div></div>
+    <div class="hero-stat"><div class="num">100%</div><div class="lbl">COMPLIANCE RECORD</div></div>
+    <div class="hero-stat"><div class="num">8+</div><div class="lbl">Year Experience</div></div>
+
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-inner" id="ticker">
+    <span class="ticker-item">INCOME TAX FILING</span><span class="ticker-item ticker-dot">&bull;</span>
+    <span class="ticker-item">GST REGISTRATION &amp; RETURNS</span><span class="ticker-item ticker-dot">&bull;</span>
+    <span class="ticker-item">MSME REGISTRATION</span><span class="ticker-item ticker-dot">&bull;</span>
+    <span class="ticker-item">FSSAI LICENSING</span><span class="ticker-item ticker-dot">&bull;</span>
+    <span class="ticker-item">BUSINESS REGISTRATION</span><span class="ticker-item ticker-dot">&bull;</span>
+    <span class="ticker-item">ACCOUNTING &amp; BOOKKEEPING</span><span class="ticker-item ticker-dot">&bull;</span>
+    <span class="ticker-item">LOAN &amp; LEGAL ADVISORY</span><span class="ticker-item ticker-dot">&bull;</span>
+    <span class="ticker-item">INCOME TAX FILING</span><span class="ticker-item ticker-dot">&bull;</span>
+    <span class="ticker-item">GST REGISTRATION &amp; RETURNS</span><span class="ticker-item ticker-dot">&bull;</span>
+    <span class="ticker-item">MSME REGISTRATION</span><span class="ticker-item ticker-dot">&bull;</span>
+    <span class="ticker-item">FSSAI LICENSING</span><span class="ticker-item ticker-dot">&bull;</span>
+    <span class="ticker-item">BUSINESS REGISTRATION</span><span class="ticker-item ticker-dot">&bull;</span>
+    <span class="ticker-item">ACCOUNTING &amp; BOOKKEEPING</span><span class="ticker-item ticker-dot">&bull;</span>
+    <span class="ticker-item">LOAN &amp; LEGAL ADVISORY</span><span class="ticker-item ticker-dot">&bull;</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="about section-wrap" id="about">
+  <div class="about-grid">
+    <div class="r">
+      <div class="section-tag">ABOUT US</div>
+      <h2 class="section-h">Simple Solutions for<br/>Complex Challenges</h2>
+      <p class="section-p">Vertex Legacy Consulting is a premier firm dedicated to empowering businesses across India. We combine deep regulatory expertise with personalized service — ensuring your business stays compliant, competitive, and always growing.</p>
+      <p class="section-p">Serving clients nationwide, we are your trusted partner from registration to growth, every single step of the way.</p>
+      <div class="about-pillars">
+        <div class="pillar"><div class="pillar-num">01</div><h4>Expert Team</h4><p>Qualified professionals with deep industry experience</p></div>
+        <div class="pillar"><div class="pillar-num">02</div><h4>Fast Process</h4><p>Quick &amp; efficient handling of all documentation</p></div>
+        <div class="pillar"><div class="pillar-num">03</div><h4>100% Compliant</h4><p>Safe, legally sound and accurate at every step</p></div>
+        <div class="pillar"><div class="pillar-num">04</div><h4>Affordable</h4><p>Best value pricing with zero hidden charges</p></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services section-wrap" id="services">
+  <div class="center r">
+    <div class="section-tag">WHAT WE OFFER</div>
+    <h2 class="section-h">Our Core Services</h2>
+  </div>
+  <div class="services-grid r2">
+    <div class="svc">
+      <span class="svc-num">01</span>
+      <div class="svc-icon-wrap"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><path d="M9 14l-4-4 4-4"/><path d="M5 10h11a4 4 0 0 1 0 8h-1"/></svg></div>
+      <h3>Income Tax</h3>
+      <div class="svc-line"></div>
+      <p>Filing &amp; compliance for individuals, firms and corporates. Accurate returns with maximum savings.</p>
+      <span class="svc-arrow">&rarr;</span>
+    </div>
+    <div class="svc">
+      <span class="svc-num">02</span>
+      <div class="svc-icon-wrap"><svg viewBox="0 0 24 24"><path d="M4 4h16v4H4z"/><path d="M4 12h10"/><path d="M4 16h6"/><circle cx="18" cy="16" r="4"/><path d="M18 14v2l1 1"/></svg></div>
+      <h3>GST Registration &amp; Returns</h3>
+      <div class="svc-line"></div>
+      <p>Complete GST solutions — registration, monthly returns, reconciliation and notice handling.</p>
+      <span class="svc-arrow">&rarr;</span>
+    </div>
+    <div class="svc">
+      <span class="svc-num">03</span>
+      <div class="svc-icon-wrap"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/><path d="M7 8h2"/><path d="M7 12h10"/></svg></div>
+      <h3>Accounting &amp; Bookkeeping</h3>
+      <div class="svc-line"></div>
+      <p>Professional bookkeeping and financial reporting to keep accounts clean and audit-ready.</p>
+      <span class="svc-arrow">&rarr;</span>
+    </div>
+    <div class="svc">
+      <span class="svc-num">04</span>
+      <div class="svc-icon-wrap"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+      <h3>FSSAI Registration</h3>
+      <div class="svc-line"></div>
+      <p>Food business licensing — hassle-free, fast and fully compliant with FSSAI norms.</p>
+      <span class="svc-arrow">&rarr;</span>
+    </div>
+    <div class="svc">
+      <span class="svc-num">05</span>
+      <div class="svc-icon-wrap"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+      <h3>MSME Registration</h3>
+      <div class="svc-line"></div>
+      <p>Register under MSME and unlock government benefits, subsidies and priority schemes.</p>
+      <span class="svc-arrow">&rarr;</span>
+    </div>
+    <div class="svc">
+      <span class="svc-num">06</span>
+      <div class="svc-icon-wrap"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+      <h3>Business Registration</h3>
+      <div class="svc-line"></div>
+      <p>Pvt Ltd, LLP, OPC, Sole Proprietorship — all formations handled end-to-end.</p>
+      <span class="svc-arrow">&rarr;</span>
+    </div>
+    <div class="svc-loan" onclick="go('contact')">
+      <div>
+        <h3>Loan &amp; Legal Advisory</h3>
+        <p>Simple solutions for complex financial and legal challenges</p>
+      </div>
+      <button class="svc-loan-btn">ENQUIRE NOW &rarr;</button>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section class="whyus section-wrap" id="why">
+  <div class="whyus-bg"></div>
+  <div class="whyus-inner">
+    <div class="center r">
+      <div class="section-tag" style="justify-content:center;">WHY CHOOSE US</div>
+      <h2 class="section-h">The Vertex Legacy Advantage</h2>
+    </div>
+    <div class="whyus-grid r2">
+      <div class="why"><div class="why-icon">&#9889;</div><h4>Fast Process</h4><p>Quick &amp; efficient delivery on all engagements</p></div>
+      <div class="why"><div class="why-icon">&#10003;</div><h4>100% Compliant</h4><p>Safe, secure &amp; legally sound always</p></div>
+      <div class="why"><div class="why-icon">&#127911;</div><h4>Expert Support</h4><p>Always here to help, every step</p></div>
+      <div class="why"><div class="why-icon">&#127919;</div><h4>Zero Errors</h4><p>Accurate &amp; reliable, guaranteed</p></div>
+      <div class="why"><div class="why-icon">&#8377;</div><h4>Affordable</h4><p>Best value, no hidden charges</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- GST -->
+<section class="gst section-wrap" id="gst">
+  <div class="center r">
+    <div class="section-tag">RESOURCE CENTER</div>
+    <h2 class="section-h">GST Registration<br/>Document Checklist</h2>
+  </div>
+  <div class="gst-grid r2">
+    <div class="gst-card">
+      <div class="gst-card-head"><div class="icon">&#128101;</div><h4>Common Documents — All Business Types</h4></div>
+      <ul>
+        <li>PAN Card</li>
+        <li>Aadhaar Card</li>
+        <li>Passport Size Photograph</li>
+        <li>Mobile Number &amp; Email ID</li>
+      </ul>
+    </div>
+    <div class="gst-card">
+      <div class="gst-card-head"><div class="icon">&#127968;</div><h4>Business Place Proof</h4></div>
+      <ul>
+        <li>Owned: Electricity Bill / Property Tax Receipt</li>
+        <li>Rented: Rent Agreement + Electricity Bill</li>
+        <li>NOC from Owner (if applicable)</li>
+      </ul>
+    </div>
+    <div class="gst-card">
+      <div class="gst-card-head"><div class="icon">&#127981;</div><h4>Company / Pvt Ltd / Public Ltd</h4></div>
+      <ul>
+        <li>PAN of Company</li>
+        <li>Certificate of Incorporation</li>
+        <li>MOA &amp; AOA</li>
+        <li>Board Resolution / Authorisation Letter</li>
+        <li>ID &amp; Address Proof of Directors</li>
+      </ul>
+    </div>
+    <div class="gst-card">
+      <div class="gst-card-head"><div class="icon">&#127974;</div><h4>LLP / Trust / Society / NGO</h4></div>
+      <ul>
+        <li>PAN of LLP / Trust / Society</li>
+        <li>LLP Agreement / Trust Deed / Bye-laws</li>
+        <li>Certificate of Incorporation</li>
+        <li>ID &amp; Address Proof of Partners / Trustees</li>
+      </ul>
+    </div>
+  </div>
+  <div class="gst-cta r3">
+    <p>Not sure which documents apply to you? Our experts will guide you through the entire process — fast, accurate, completely stress-free.</p>
+    <button class="gst-cta-btn" onclick="go('contact')">GET GST HELP NOW &rarr;</button>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact section-wrap" id="contact">
+  <div class="contact-grid">
+    <div class="r">
+      <div class="section-tag">GET IN TOUCH</div>
+      <h2 class="section-h">Let's Grow Your Business Together</h2>
+      <p class="section-p">Have a question or need a consultation? Fill the form and our team will respond within 24 hours. Or reach us directly — we're always available.</p>
+      <div style="margin-top:36px;">
+        <div class="c-item">
+          <div class="c-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.77a16 16 0 0 0 6.29 6.29l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+          <div><div class="c-label">WHATSAPP / CALL</div><div class="c-val">+91 9601172397</div></div>
+        </div>
+        <div class="c-item">
+          <div class="c-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+          <div><div class="c-label">EMAIL</div><div class="c-val">vertexlegacy.in@gmail.com</div></div>
+        </div>
+        <div class="c-item">
+          <div class="c-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="10" r="3"/><path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 12 8 12s8-6.75 8-12a8 8 0 0 0-8-8z"/></svg></div>
+          <div><div class="c-label">SERVING</div><div class="c-val">Nationwide — 100+ Clients</div></div>
+        </div>
+        <div class="c-item">
+          <div class="c-icon"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></div>
+          <div><div class="c-label">INSTAGRAM</div><div class="c-val">@vertex_legacy_consulting</div></div>
+        </div>
+      </div>
+      <a class="wa-link" href="https://wa.me/919601172397?text=Hello%20Vertex%20Legacy%20Consulting!" target="_blank">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        CHAT ON WHATSAPP
+      </a>
+    </div>
+    <div class="r2">
+      <div class="contact-form">
+        <h3>Send Us a Message</h3>
+        <div class="f-row">
+          <div class="fg"><label>YOUR NAME *</label><input type="text" id="fn" placeholder="Harsh Patel"/></div>
+          <div class="fg"><label>PHONE *</label><input type="tel" id="fp" placeholder="9876543210"/></div>
+        </div>
+        <div class="fg"><label>EMAIL</label><input type="email" id="fe" placeholder="you@email.com"/></div>
+        <div class="fg"><label>SERVICE NEEDED *</label>
+          <select id="fs">
+            <option value="">Select a service...</option>
+            <option>Income Tax Filing</option>
+            <option>GST Registration &amp; Returns</option>
+            <option>Accounting &amp; Bookkeeping</option>
+            <option>FSSAI Registration</option>
+            <option>MSME Registration</option>
+            <option>Business Registration</option>
+            <option>Loan &amp; Legal Advisory</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="fg"><label>MESSAGE</label><textarea id="fm" placeholder="Tell us briefly about your requirement..."></textarea></div>
+        <button class="f-submit" onclick="handleSubmit()">SEND MESSAGE &rarr;</button>
+        <div class="f-success" id="fsuc">&#10003; Thank you! We will contact you within 24 hours.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <!-- Brand -->
+    <div class="f-brand">
+      <a href="#home" style="display:inline-flex;align-items:center;">
+        <svg viewBox="0 0 320 70" xmlns="http://www.w3.org/2000/svg" height="42" style="display:block;">
+          <defs>
+            <linearGradient id="ftcgrad" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" style="stop-color:#d4af55;stop-opacity:1"/>
+              <stop offset="100%" style="stop-color:#f0d080;stop-opacity:1"/>
+            </linearGradient>
+          </defs>
+          <!-- v -->
+          <text x="0" y="56" font-family="'DM Sans',Arial,sans-serif" font-size="58" font-weight="700" fill="#ffffff">v</text>
+          <!-- l -->
+          <text x="44" y="56" font-family="'DM Sans',Arial,sans-serif" font-size="58" font-weight="700" fill="rgba(255,255,255,0.6)">l</text>
+          <!-- c in gold gradient -->
+          <text x="62" y="56" font-family="'DM Sans',Arial,sans-serif" font-size="58" font-weight="700" fill="url(#ftcgrad)">c</text>
+          <!-- vertical divider -->
+          <rect x="115" y="8" width="2.5" height="54" fill="rgba(255,255,255,0.2)"/>
+          <!-- VERTEX LEGACY -->
+          <text x="128" y="32" font-family="'DM Sans',Arial,sans-serif" font-size="17" font-weight="700" fill="#ffffff" letter-spacing="0.5">VERTEX LEGACY</text>
+          <!-- CONSULTING -->
+          <text x="128" y="54" font-family="'DM Sans',Arial,sans-serif" font-size="17" font-weight="700" fill="#b8973a" letter-spacing="0.5">CONSULTING</text>
+        </svg>
+      </a>
+      <p>Expert guidance and trusted solutions for businesses across India. From compliance to growth — we handle complexity so you can focus on building.</p>
+      <div class="f-social">
+        <a href="https://wa.me/919601172397" target="_blank" aria-label="WhatsApp">
+          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" fill="currentColor" stroke="none"/></svg>
+        </a>
+        <a href="mailto:vertexlegacy.in@gmail.com" aria-label="Email">
+          <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </a>
+        <a href="https://instagram.com/vertex_legacy_consulting" target="_blank" aria-label="Instagram">
+          <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        </a>
+      </div>
+
+    </div>
+
+    <!-- Services -->
+    <div class="f-col">
+      <h5>Services</h5>
+      <ul>
+        <li><a href="#services">Income Tax Filing</a></li>
+        <li><a href="#services">GST Registration &amp; Returns</a></li>
+        <li><a href="#services">Accounting &amp; Bookkeeping</a></li>
+        <li><a href="#services">FSSAI Registration</a></li>
+        <li><a href="#services">MSME Registration</a></li>
+        <li><a href="#services">Business Registration</a></li>
+        <li><a href="#services">Loan &amp; Legal Advisory</a></li>
+      </ul>
+    </div>
+
+    <!-- Firm -->
+    <div class="f-col">
+      <h5>Firm</h5>
+      <ul>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#why">Why Choose Us</a></li>
+        <li><a href="#gst">GST Guide</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+
+    <!-- Contact -->
+    <div class="f-col">
+      <h5>Contact</h5>
+      <ul>
+        <li><a href="tel:9601172397">+91 96011 72397</a></li>
+        <li><a href="mailto:vertexlegacy.in@gmail.com">vertexlegacy.in@gmail.com</a></li>
+        <li><a href="https://instagram.com/vertex_legacy_consulting" target="_blank">@vertex_legacy_consulting</a></li>
+      </ul>
+    </div>
+  </div>
+
+<div class="footer-bot">
+    <p>&copy; 2026 Vertex Legacy Consulting. All rights reserved.</p>
+    <div style="display:flex;gap:20px;">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Disclaimer</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+function go(id){document.getElementById(id).scrollIntoView({behavior:'smooth'});}
+function toggleMob(){document.getElementById('mobnav').classList.toggle('open');}
+function closeMob(){document.getElementById('mobnav').classList.remove('open');}
+
+window.addEventListener('scroll',function(){
+  document.getElementById('nav').classList.toggle('scrolled',window.scrollY>40);
+});
+
+function handleSubmit(){
+  var n=document.getElementById('fn').value.trim();
+  var p=document.getElementById('fp').value.trim();
+  var s=document.getElementById('fs').value;
+  var e=document.getElementById('fe').value.trim();
+  var m=document.getElementById('fm').value.trim();
+  if(!n||!p||!s){alert('Please fill Name, Phone and Service.');return;}
+  var txt='Hello Vertex Legacy Consulting!%0A%0AName: '+encodeURIComponent(n)+'%0APhone: '+encodeURIComponent(p)+'%0AEmail: '+encodeURIComponent(e||'Not provided')+'%0AService: '+encodeURIComponent(s)+'%0AMessage: '+encodeURIComponent(m||'—');
+  var btn=document.querySelector('.f-submit');
+  btn.disabled=true;btn.textContent='SENT \u2713';btn.style.background='#166534';
+  document.getElementById('fsuc').style.display='block';
+  setTimeout(function(){window.open('https://wa.me/919601172397?text='+txt,'_blank');},700);
+}
+
+var io=new IntersectionObserver(function(entries){
+  entries.forEach(function(e){if(e.isIntersecting)e.target.classList.add('in');});
+},{threshold:0.05});
+document.querySelectorAll('.r,.r2,.r3').forEach(function(el){io.observe(el);});
+window.addEventListener('load',function(){
+  document.querySelectorAll('.r,.r2,.r3').forEach(function(el){
+    var rect=el.getBoundingClientRect();
+    if(rect.top<window.innerHeight)el.classList.add('in');
+  });
+});
+
+document.querySelectorAll('a[href^="#"]').forEach(function(a){
+  a.addEventListener('click',function(e){
+    e.preventDefault();
+    var t=document.querySelector(a.getAttribute('href'));
+    if(t)t.scrollIntoView({behavior:'smooth'});
+  });
+});
+</script>
+</body>
+</html>
